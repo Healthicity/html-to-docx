@@ -93,15 +93,28 @@ async function generateSectionXML(vTree, type = 'header') {
   const XMLFragment = fragment();
   await convertVTreeToXML(this, vTree, XMLFragment);
   if (type === 'footer' && XMLFragment.first().node.tagName === 'p' && this.pageNumber) {
-    XMLFragment.first().import(
-      fragment({ namespaceAlias: { w: namespaces.w } })
-        .ele('@w', 'fldSimple')
-        .att('@w', 'instr', 'PAGE')
-        .ele('@w', 'r')
-        .up()
-        .up()
-    );
+    // Create XML elements for page number
+
+    const pageNumberElement = fragment({ namespaceAlias: { w: namespaces.w } })
+    .ele('@w', 'p')
+    .ele('@w', 'pPr')
+    .ele('@w', 'jc').att('@w', 'val', 'right').up()
+    .up()
+    .ele('@w', 'r')
+    .ele('@w', 'br') // Line break
+    .ele('@w', 'br') // Line break
+    .up()
+    .ele('@w', 'r')
+    .ele('@w', 'fldSimple')
+    .att('@w', 'instr', 'PAGE')
+    .up()
+    .up();
+
+    // Import the page number element
+    XMLFragment.first().import(pageNumberElement);
   }
+  
+  // Import the XMLFragment into the sectionXML
   sectionXML.root().import(XMLFragment);
 
   const referenceName = type === 'header' ? 'Header' : 'Footer';
