@@ -166,7 +166,7 @@ class DocxDocument {
     this.lang = properties.lang || defaultLang;
     this.tableRowCantSplit =
       (properties.table && properties.table.row && properties.table.row.cantSplit) || false;
-    this.pageNumber = properties.pageNumber || false;
+    this.pageNumber = properties.pageNumber ? ("Page " +  properties.pageNumber) : false;
     this.skipFirstHeaderFooter = properties.skipFirstHeaderFooter || false;
     this.lineNumber = properties.lineNumber ? properties.lineNumberOptions : null;
 
