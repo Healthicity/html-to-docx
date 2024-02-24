@@ -105,8 +105,7 @@ async function generateSectionXML(vTree, type = 'header') {
     .ele('@w', 'br') // Line break
     .up()
     .ele('@w', 'r')
-    .ele('@w', 't').txt('Page').up()  // Appending 'Page ' text
-    .ele('@w', 't').txt(' ').up()      // Adding a space
+    .ele('@w', 't').txt('Page ').up()  // Appending 'Page ' text along with space
     .ele('@w', 'fldSimple')
     .att('@w', 'instr', 'PAGE')
     .up()
