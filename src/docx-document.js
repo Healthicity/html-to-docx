@@ -101,16 +101,17 @@ async function generateSectionXML(vTree, type = 'header') {
     .ele('@w', 'jc').att('@w', 'val', 'right').up()
     .up()
     .ele('@w', 'r')
+    .ele('@w', 'fldSimple')
+    .up()
+    .ele('@w', 'r')
     .ele('@w', 'br') // Line break
     .ele('@w', 'br') // Line break
     .up()
-    .ele('@w', 'r')
-    .ele('@w', 't').txt('Page').up()  // Appending 'Page ' text
-    .ele('@w', 't').txt(' ').up()      // Adding a space
-    .ele('@w', 'fldSimple')
+    .ele('@w', 't').txt('Page\u00A0').up()  // Appending 'Page' text along with space (using Unicode representation)
     .att('@w', 'instr', 'PAGE')
     .up()
     .up();
+
 
     // Import the page number element
     XMLFragment.first().import(pageNumberElement);
